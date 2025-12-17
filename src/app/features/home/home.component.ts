@@ -5,11 +5,19 @@ import { SHARED_MATERIAL_IMPORTS } from '../../shared/material/material.imports'
 import { UsersPicker } from "../transactions/components/users-picker/users-picker";
 import { User } from '../users/models/user.model';
 import { Services } from '../users/services/user.service';
+import { TransactionForm } from "../transactions/components/transaction-form/transaction-form";
+import { TransactionsList } from "../transactions/components/transactions-list/transactions-list";
 
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [CommonModule, SHARED_MATERIAL_IMPORTS, UsersPicker],
+    imports: [
+        CommonModule,
+        SHARED_MATERIAL_IMPORTS,
+        UsersPicker,
+        TransactionForm,
+        TransactionsList
+    ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })

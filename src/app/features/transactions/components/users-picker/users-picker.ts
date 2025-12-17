@@ -15,6 +15,7 @@ export class UsersPicker {
   constructor() { }
 
   selectUser(user: User) {
+    console.log(user);
     this.userSelected.emit(user);
   }
 }

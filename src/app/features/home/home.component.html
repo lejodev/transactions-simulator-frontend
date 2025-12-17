@@ -1,17 +1,36 @@
-<div class="h-screen bg-gray-50 flex flex-col justify-center items-center">
-    <mat-card class="max-w-md w-full p-6 text-center shadow-lg">
-        <mat-card-header class="justify-center mb-6">
-            <div class="h-20 w-20 bg-blue-100 rounded-full flex items-center justify-center">
-                <mat-icon
-                    class="text-blue-600 !w-10 !h-10 !text-[40px] flex items-center justify-center">home</mat-icon>
+<div class="home-container">
+    <div class="main-content">
+
+        <!-- Step 1: Select User -->
+        <section class="step-section">
+            <div class="step-header">
+                <span class="step-badge">1</span>
+                <h2>Select User</h2>
             </div>
-        </mat-card-header>
+            <app-users-picker [users]="users()"></app-users-picker>
+        </section>
 
-        <mat-card-content>
-            <h1 class="text-3xl font-bold text-gray-800 mb-2">Welcome</h1>
-            <p class="text-gray-500 mb-8">This is the default home screen for your application.</p>
+        <!-- Step 2: Make Transaction -->
+        <section class="step-section">
+            <div class="step-header">
+                <span class="step-badge">2</span>
+                <h2>Make Transaction</h2>
+            </div>
+            <app-transaction-form></app-transaction-form>
+        </section>
 
-        </mat-card-content>
-    </mat-card>
-    <app-users-picker [users]="users()"></app-users-picker>
+    </div>
+
+    <div class="sidebar">
+
+        <!-- Step 3: View History -->
+        <section class="step-section sticky-section">
+            <div class="step-header">
+                <span class="step-badge">3</span>
+                <h2>Transaction History</h2>
+            </div>
+            <app-transactions-list></app-transactions-list>
+        </section>
+
+    </div>
 </div>
