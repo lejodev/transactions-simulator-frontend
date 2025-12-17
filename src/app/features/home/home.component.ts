@@ -24,6 +24,7 @@ import { TransactionsList } from "../transactions/components/transactions-list/t
 export class HomeComponent {
 
     users = signal<User[]>([]);
+    selectedUser = signal<User | null>(null);
 
     constructor(private userService: Services) { }
 
@@ -33,5 +34,9 @@ export class HomeComponent {
         });
     }
 
+    // Event 
+    onUserSelected(user: User) {
+        this.selectedUser.set(user);
+    }
 
 }

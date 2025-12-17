@@ -1,29 +1,26 @@
 <div class="home-container">
     <div class="main-content">
 
-        <!-- Step 1: Select User -->
         <section class="step-section">
             <div class="step-header">
                 <span class="step-badge">1</span>
                 <h2>Select User</h2>
             </div>
-            <app-users-picker [users]="users()"></app-users-picker>
+            <app-users-picker [users]="users()" [selectedUser]="selectedUser()" (userSelected)="onUserSelected($event)">
+            </app-users-picker>
         </section>
 
-        <!-- Step 2: Make Transaction -->
         <section class="step-section">
             <div class="step-header">
                 <span class="step-badge">2</span>
                 <h2>Make Transaction</h2>
             </div>
-            <app-transaction-form></app-transaction-form>
+            <app-transaction-form [selectedUser]="selectedUser()"></app-transaction-form>
         </section>
 
     </div>
 
     <div class="sidebar">
-
-        <!-- Step 3: View History -->
         <section class="step-section sticky-section">
             <div class="step-header">
                 <span class="step-badge">3</span>
