@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 import { SHARED_MATERIAL_IMPORTS } from '../../shared/material/material.imports';
 import { UsersPicker } from "../transactions/components/users-picker/users-picker";
@@ -8,6 +9,7 @@ import { User } from '../users/models/user.model';
 import { Services } from '../users/services/user.service';
 import { TransactionForm } from "../transactions/components/transaction-form/transaction-form";
 import { TransactionService } from '../transactions/services/transaction.service';
+import { CusModalComponent } from '../transactions/components/cus-modal/cus-modal.component';
 
 @Component({
     selector: 'app-home',
@@ -29,7 +31,8 @@ export class HomeComponent {
     constructor(
         private userService: Services,
         private transactionService: TransactionService,
-        private router: Router
+        private router: Router,
+        private dialog: MatDialog
     ) { }
 
     ngOnInit() {
@@ -44,14 +47,23 @@ export class HomeComponent {
 
     onTransactionSubmit(transaction: { amount: number, user: User }) {
         if (this.selectedUser()) {
-            console.log("TRANSACTION", transaction);
-            this.transactionService.saveTransaction({
+            const createdTransaction = this.transactionService.saveTransaction({
                 amount: transaction.amount,
                 user: this.selectedUser()!
             });
+
             this.selectedUser.set(null);
-            // Navigate to history page to show the new transaction
-            this.router.navigate(['/history']);
+
+            // Show CUS Modal
+            const dialogRef = this.dialog.open(CusModalComponent, {
+                data: { transaction: createdTransaction },
+                width: '500px'
+            });
+
+            dialogRef.afterClosed().subscribe(() => {
+                // Navigate to history page after modal is closed
+                this.router.navigate(['/history']);
+            });
         }
         else {
             console.log("No user selected");
