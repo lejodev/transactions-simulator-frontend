@@ -36,16 +36,18 @@
                 (formSubmit)="onTransactionSubmit($event)"></app-transaction-form>
         </section>
 
-    </div>
-
-    <div class="sidebar">
-        <section class="step-section sticky-section">
-            <div class="step-header">
-                <span class="step-badge">3</span>
-                <h2>Historial de Transacciones</h2>
+        <section class="step-section history-cta">
+            <div class="cta-content">
+                <mat-icon class="cta-icon">history</mat-icon>
+                <h3>¿Desea consultar el historial?</h3>
+                <p>Revise todas las transacciones realizadas en el sistema.</p>
+                <button mat-raised-button color="accent" (click)="navigateToHistory()">
+                    <mat-icon>receipt_long</mat-icon>
+                    Ver Historial Completo
+                </button>
             </div>
-            <app-transactions-list [transactions]="transactions()"></app-transactions-list>
         </section>
 
     </div>
+
 </div>
