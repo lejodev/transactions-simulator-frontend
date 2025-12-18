@@ -42,7 +42,6 @@ export class HomeComponent {
         });
     }
 
-    // Event 
     onUserSelected(user: User) {
         this.selectedUser.set(user);
     }
