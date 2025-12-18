@@ -24,7 +24,7 @@ export class TransactionService {
     return crypto.randomUUID();
   }
 
-  saveTransaction(transactionDto: transactionDto): void {
+  saveTransaction(transactionDto: transactionDto): Transaction {
 
     const rawCus = transactionDto.user.name
     const encryptedCus = this.cusService.encrypt(rawCus);
@@ -38,6 +38,7 @@ export class TransactionService {
     };
 
     this.transactionRepository.saveTransaction(transaction);
+    return transaction;
   }
 
   revealCus(cus: string): string {
