@@ -10,6 +10,7 @@ import { SHARED_MATERIAL_IMPORTS } from '../../../../shared/material/material.im
 })
 export class UsersPicker {
   @Input() users: User[] = [];
+  @Input() selectedUser: User | null = null;
   @Output() userSelected = new EventEmitter<User>();
 
   constructor() { }

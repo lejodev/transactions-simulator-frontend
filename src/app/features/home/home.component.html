@@ -1,17 +1,51 @@
-<div class="h-screen bg-gray-50 flex flex-col justify-center items-center">
-    <mat-card class="max-w-md w-full p-6 text-center shadow-lg">
-        <mat-card-header class="justify-center mb-6">
-            <div class="h-20 w-20 bg-blue-100 rounded-full flex items-center justify-center">
-                <mat-icon
-                    class="text-blue-600 !w-10 !h-10 !text-[40px] flex items-center justify-center">home</mat-icon>
+<div class="home-container">
+
+
+    <mat-toolbar color="primary" class="app-toolbar">
+        <span>Portal de Transacciones Cotrafa</span>
+        <span class="toolbar-spacer"></span>
+        <div class="user-greeting">
+            <span>Bienvenido de nuevo</span>
+            <mat-icon>account_circle</mat-icon>
+        </div>
+    </mat-toolbar>
+
+    <div class="page-title-section">
+        <h1>Panel de Transacciones</h1>
+        <p class="subtitle">Seleccione un usuario y gestione sus transferencias fácilmente.</p>
+    </div>
+
+    <div class="main-content">
+
+
+        <section class="step-section">
+            <div class="step-header">
+                <span class="step-badge">1</span>
+                <h2>Seleccionar Usuario</h2>
             </div>
-        </mat-card-header>
+            <app-users-picker [users]="users()" [selectedUser]="selectedUser()" (userSelected)="onUserSelected($event)">
+            </app-users-picker>
+        </section>
 
-        <mat-card-content>
-            <h1 class="text-3xl font-bold text-gray-800 mb-2">Welcome</h1>
-            <p class="text-gray-500 mb-8">This is the default home screen for your application.</p>
+        <section class="step-section">
+            <div class="step-header">
+                <span class="step-badge">2</span>
+                <h2>Realizar Transacción</h2>
+            </div>
+            <app-transaction-form [selectedUser]="selectedUser()"
+                (formSubmit)="onTransactionSubmit($event)"></app-transaction-form>
+        </section>
 
-        </mat-card-content>
-    </mat-card>
-    <app-users-picker [users]="users()"></app-users-picker>
+    </div>
+
+    <div class="sidebar">
+        <section class="step-section sticky-section">
+            <div class="step-header">
+                <span class="step-badge">3</span>
+                <h2>Historial de Transacciones</h2>
+            </div>
+            <app-transactions-list [transactions]="transactions()"></app-transactions-list>
+        </section>
+
+    </div>
 </div>

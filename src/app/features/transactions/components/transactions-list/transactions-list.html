@@ -1,1 +1,48 @@
-<p>transactions-list works!</p>
+<div class="transactions-container">
+    @if (transactions.length > 0) {
+    <div class="transactions-list">
+        @for (transaction of transactions; track transaction.id) {
+        <mat-card class="transaction-card" appearance="outlined">
+            <mat-card-header>
+                <div mat-card-avatar class="user-avatar-container">
+                    <img [src]="transaction.user.picture" alt="User Avatar" class="user-avatar"
+                        onerror="this.src='assets/default-avatar.png';">
+                </div>
+                <mat-card-title>{{transaction.user.name}}</mat-card-title>
+                <mat-card-subtitle>{{transaction.date | date:'short'}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="card-main-content">
+                    <div class="transaction-row">
+                        <span class="label text-gray-500 text-sm">Monto:</span>
+                        <div class="transaction-amount positive">
+                            {{transaction.amount | currency:'USD':'symbol':'1.0-0'}}
+                        </div>
+                    </div>
+
+                    <div class="transaction-row">
+                        <span class="label text-gray-500 text-sm self-center">CUS:</span>
+                        <div class="transaction-cus cursor-pointer select-none">
+                            @if (revealedCusId() === transaction.id) {
+                            <span class="font-mono font-bold text-blue-600">{{decryptedCusValue()}}</span>
+                            } @else {
+                            <span class="text-gray-400">************</span>
+                            }
+                            <button mat-icon-button (click)="toggleCus(transaction)" class="reveal-btn">
+                                <mat-icon>{{ revealedCusId() === transaction.id ? 'visibility_off' : 'visibility'
+                                    }}</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        }
+    </div>
+    } @else {
+    <div class="empty-state">
+        <mat-icon class="empty-icon">history</mat-icon>
+        <p>Aún no hay transacciones.</p>
+    </div>
+    }
+</div>
