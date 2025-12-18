@@ -14,10 +14,10 @@
     min-height: 100vh;
 
     @media (min-width: 1024px) {
-        display: grid; // Re-declare to be safe or rely on cascade
+        display: grid;
         grid-template-columns: 2fr 1fr;
-        gap: 24px; // Restore larger gap
-        padding: 24px; // Restore larger padding
+        gap: 24px;
+        padding: 24px;
         align-items: start;
         grid-template-areas:
             "header header"
@@ -49,14 +49,14 @@
     margin-bottom: 2rem;
 
     h1 {
-        font-size: 1.75rem; // Smaller on mobile
+        font-size: 1.75rem;
         font-weight: 800;
         color: #111827;
         margin: 0 0 0.5rem 0;
         letter-spacing: -0.025em;
 
         @media (min-width: 640px) {
-            font-size: 2.5rem; // Restore large size on tablets+
+            font-size: 2.5rem;
         }
     }
 
@@ -117,7 +117,6 @@
     width: 40px;
     height: 40px;
     background-color: #2563eb;
-    /* Blue 600 */
     color: white;
     border-radius: 50%;
     font-weight: 700;

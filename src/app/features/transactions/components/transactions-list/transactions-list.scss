@@ -21,10 +21,6 @@
 
     mat-card-header {
         align-items: center;
-        // Make header a flex container to push content to the right if needed,
-        // but default Angular Material header behavior handles title/subtitle.
-        // We will position the amount absolutely or via a custom header layout.
-        // For mobile-first, let's keep it simple: Standard header, content below.
     }
 
     .user-avatar-container {
