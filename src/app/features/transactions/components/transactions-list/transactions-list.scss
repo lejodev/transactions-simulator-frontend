@@ -12,13 +12,15 @@
 }
 
 .transaction-card {
-    transition: transform 0.2s, box-shadow 0.2s;
-    border: 1px solid #e5e7eb;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s, border-color 0.2s;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
 
     &:hover {
         transform: translateY(-2px);
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-        border-color: #d1d5db;
+        border-color: var(--mat-sys-outline);
+        background-color: var(--card-hover);
     }
 
     .card-content-vertical {
@@ -46,8 +48,8 @@
             height: 50px;
             border-radius: 50%;
             overflow: hidden;
-            background-color: #f0f0f0;
-            border: 2px solid #e5e7eb;
+            background-color: var(--surface-tint);
+            border: 2px solid var(--border-color);
             flex-shrink: 0;
 
             .user-avatar {
@@ -65,12 +67,12 @@
             .user-name {
                 font-size: 1rem;
                 font-weight: 600;
-                color: #111827;
+                color: var(--text-primary);
             }
 
             .transaction-date {
                 font-size: 0.875rem;
-                color: #6b7280;
+                color: var(--text-secondary);
             }
         }
     }
@@ -87,12 +89,12 @@
         align-items: center;
         gap: 0.5rem;
         padding-top: 0.5rem;
-        border-top: 1px solid #f3f4f6;
+        border-top: 1px solid var(--border-color);
     }
 
     .label {
         font-size: 0.875rem;
-        color: #6b7280;
+        color: var(--text-secondary);
         font-weight: 500;
         white-space: nowrap;
     }
@@ -103,11 +105,11 @@
     font-weight: 700;
 
     &.positive {
-        color: #2e7d32; // Green
+        color: var(--mat-sys-primary);
     }
 
     &.negative {
-        color: #e53935; // Red
+        color: var(--mat-sys-error);
     }
 }
 
@@ -121,15 +123,15 @@
     .cus-value {
         font-family: 'Courier New', monospace;
         font-weight: 600;
-        color: #2563eb;
+        color: var(--primary);
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         flex: 1;
         padding: 0.25rem 0.5rem;
         border-radius: 6px;
-        background-color: #f9fafb;
-        border: 1px solid #e5e7eb;
+        background-color: var(--surface-tint);
+        border: 1px solid var(--border-color);
     }
 }
 
@@ -139,7 +141,7 @@
     align-items: center;
     justify-content: center;
     padding: 3rem;
-    color: #9ca3af;
+    color: var(--text-secondary);
     text-align: center;
 
     .empty-icon {

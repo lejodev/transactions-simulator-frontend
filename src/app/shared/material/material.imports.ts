@@ -8,6 +8,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 export const SHARED_MATERIAL_IMPORTS = [
     MatButtonModule,
@@ -19,5 +20,6 @@ export const SHARED_MATERIAL_IMPORTS = [
     MatProgressSpinnerModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule
 ]
