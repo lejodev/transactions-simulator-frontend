@@ -1,11 +1,13 @@
 .transaction-card {
     border-radius: 16px;
     overflow: hidden;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
 
     mat-card-header {
-        background-color: #fafafa;
+        background-color: var(--surface-tint);
         padding: 1.5rem;
-        border-bottom: 1px solid #f0f0f0;
+        border-bottom: 1px solid var(--border-color);
     }
 
     .recipient-avatar {
@@ -13,6 +15,7 @@
         height: 48px;
         border-radius: 50%;
         overflow: hidden;
+        border: 2px solid var(--border-color);
 
         img {
             width: 100%;
@@ -33,18 +36,18 @@
 
     .amount-field {
         width: 100%;
-        font-size: 1.5rem; // Larger text for amount
+        font-size: 1.5rem;
 
         .currency-prefix {
             font-size: 1.5rem;
-            color: #666;
+            color: var(--text-secondary);
             margin-right: 4px;
         }
     }
 
     .submit-btn {
         width: 100%;
-        padding: 1.5rem !important; // Match touch targets
+        padding: 1.5rem !important;
         font-size: 1.1rem;
         border-radius: 8px;
     }
@@ -52,8 +55,9 @@
 
 .empty-state-card {
     border-radius: 16px;
-    border-style: dashed; // Dashed border for empty state
-    background-color: #fafafa;
+    border-style: dashed;
+    background-color: var(--surface-tint);
+    border-color: var(--border-color);
 
     .empty-state-content {
         display: flex;
@@ -62,13 +66,13 @@
         justify-content: center;
         padding: 3rem 1.5rem;
         text-align: center;
-        color: #757575;
+        color: var(--text-secondary);
 
         .icon-circle {
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background-color: #e0e0e0;
+            background-color: var(--mat-sys-surface-container-high);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -78,19 +82,20 @@
                 font-size: 40px;
                 width: 40px;
                 height: 40px;
-                color: #757575;
+                color: var(--text-secondary);
             }
         }
 
         h3 {
             margin: 0 0 0.5rem 0;
             font-weight: 500;
-            color: #424242;
+            color: var(--text-primary);
         }
 
         p {
             margin: 0;
             font-size: 0.9rem;
+            color: var(--text-secondary);
         }
     }
 }

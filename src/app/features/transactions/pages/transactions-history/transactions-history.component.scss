@@ -2,6 +2,11 @@
     min-height: 100vh;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 2rem;
+    transition: background 0.3s ease;
+
+    :host-context(.dark-theme) & {
+        background: linear-gradient(135deg, #1a237e 0%, #311b92 100%);
+    }
 }
 
 .page-header {
@@ -41,38 +46,40 @@
 
 .history-content {
     max-width: 900px;
-    margin: 0 auto; // Center the content
+    margin: 0 auto;
 
     .transactions-wrapper {
-        background: white;
+        background: var(--card-bg);
         border-radius: 16px;
         padding: 2rem;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        border: 1px solid var(--border-color);
     }
 
     .empty-state {
-        background: white;
+        background: var(--card-bg);
         border-radius: 16px;
         padding: 4rem 2rem;
         text-align: center;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        border: 1px solid var(--border-color);
 
         .empty-icon {
             font-size: 96px;
             width: 96px;
             height: 96px;
-            color: #667eea;
+            color: var(--primary);
             margin: 0 auto 1.5rem;
         }
 
         h3 {
-            color: #333;
+            color: var(--text-primary);
             font-size: 1.5rem;
             margin: 0 0 0.5rem;
         }
 
         p {
-            color: #666;
+            color: var(--text-secondary);
             margin: 0 0 2rem;
         }
 
