@@ -3,41 +3,33 @@
     <div class="transactions-list">
         @for (transaction of transactions; track transaction.id) {
         <mat-card class="transaction-card" appearance="outlined">
-            <div class="card-content-horizontal">
-                <!-- Left: User Info -->
-                <div class="user-info-section">
-                    <div class="user-avatar-container">
-                        <img [src]="transaction.user.picture" alt="User Avatar" class="user-avatar"
-                            onerror="this.src='assets/default-avatar.png';">
+            <div class="card-content-vertical">
+                <!-- Top: User Info and Amount on same line -->
+                <div class="card-header-row">
+                    <div class="user-info-section">
+                        <div class="user-avatar-container">
+                            <img [src]="transaction.user.picture" alt="User Avatar" class="user-avatar"
+                                onerror="this.src='assets/default-avatar.png';">
+                        </div>
+                        <div class="user-details">
+                            <div class="user-name">{{transaction.user.name}}</div>
+                            <div class="transaction-date">{{transaction.date | date:'short'}}</div>
+                        </div>
                     </div>
-                    <div class="user-details">
-                        <div class="user-name">{{transaction.user.name}}</div>
-                        <div class="transaction-date">{{transaction.date | date:'short'}}</div>
-                    </div>
-                </div>
 
-                <!-- Right: Transaction Details -->
-                <div class="transaction-info-section">
-                    <div class="transaction-row">
+                    <div class="amount-section">
                         <span class="label">Monto:</span>
                         <div class="transaction-amount positive">
                             {{transaction.amount | currency:'USD':'symbol':'1.0-0'}}
                         </div>
                     </div>
+                </div>
 
-                    <div class="transaction-row">
-                        <span class="label">CUS:</span>
-                        <div class="transaction-cus">
-                            @if (revealedCusId() === transaction.id) {
-                            <span class="cus-value revealed">{{decryptedCusValue()}}</span>
-                            } @else {
-                            <span class="cus-value masked">************</span>
-                            }
-                            <button mat-icon-button (click)="toggleCus(transaction)" class="reveal-btn">
-                                <mat-icon>{{ revealedCusId() === transaction.id ? 'visibility_off' : 'visibility'
-                                    }}</mat-icon>
-                            </button>
-                        </div>
+                <!-- Bottom: CUS in full width -->
+                <div class="cus-section">
+                    <span class="label">CUS:</span>
+                    <div class="transaction-cus">
+                        <span class="cus-value">{{transaction.cus}}</span>
                     </div>
                 </div>
             </div>
