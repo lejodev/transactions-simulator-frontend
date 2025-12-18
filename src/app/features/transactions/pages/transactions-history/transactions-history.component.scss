@@ -40,6 +40,9 @@
 }
 
 .history-content {
+    max-width: 900px;
+    margin: 0 auto; // Center the content
+
     .transactions-wrapper {
         background: white;
         border-radius: 16px;
