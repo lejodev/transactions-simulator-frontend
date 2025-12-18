@@ -21,16 +21,20 @@
         border-color: #d1d5db;
     }
 
-    // Horizontal layout: user info on left, transaction details on right
-    .card-content-horizontal {
+    .card-content-vertical {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 2rem;
+        flex-direction: column;
+        gap: 1rem;
         padding: 1rem;
     }
 
-    // Left section: User info
+    .card-header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+
     .user-info-section {
         display: flex;
         align-items: center;
@@ -71,19 +75,19 @@
         }
     }
 
-    // Right section: Transaction details
-    .transaction-info-section {
+    .amount-section {
         display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        align-items: flex-end;
+        align-items: center;
+        gap: 0.5rem;
         flex-shrink: 0;
     }
 
-    .transaction-row {
+    .cus-section {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        gap: 0.5rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid #f3f4f6;
     }
 
     .label {
@@ -110,42 +114,22 @@
 .transaction-cus {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
     font-size: 0.875rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 6px;
-    background-color: #f9fafb;
-    border: 1px solid #e5e7eb;
-    transition: all 0.2s;
-
-    &:hover {
-        background-color: #f3f4f6;
-        border-color: #d1d5db;
-    }
+    flex: 1;
+    min-width: 0;
 
     .cus-value {
-        &.revealed {
-            font-family: 'Courier New', monospace;
-            font-weight: 700;
-            color: #2563eb;
-        }
-
-        &.masked {
-            color: #9ca3af;
-        }
-    }
-
-    .reveal-btn {
-        width: 32px;
-        height: 32px;
-        padding: 4px;
-        line-height: normal;
-
-        mat-icon {
-            font-size: 20px;
-            width: 20px;
-            height: 20px;
-        }
+        font-family: 'Courier New', monospace;
+        font-weight: 600;
+        color: #2563eb;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex: 1;
+        padding: 0.25rem 0.5rem;
+        border-radius: 6px;
+        background-color: #f9fafb;
+        border: 1px solid #e5e7eb;
     }
 }
 
