@@ -1,60 +1,65 @@
-# Frontend
+# Simulador de Transacciones - Cotrafa
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.5.
+Este proyecto es una aplicación web moderna diseñada para simular el envío de dinero entre usuarios. Está construida sobre **Angular 19** y utiliza **Angular Material** para ofrecer una interfaz limpia, profesional y con soporte completo para modo oscuro.
 
-## Development server
+La aplicación permite gestionar todo el flujo de una transacción: desde elegir al destinatario y definir el monto, hasta generar un comprobante con un código de seguridad (CUS) encriptado y consultar el historial.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 🛠️ Detalles Técnicos y Arquitectura
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+En este desarrollo me enfoqué en usar las funcionalidades más recientes de Angular y seguir patrones que faciliten el mantenimiento a largo plazo. Aquí te cuento los puntos clave:
 
-## Code scaffolding
+### Gestión de Estado con Signals
+En lugar de depender del sistema de detección de cambios tradicional, utilicé **Angular Signals** para manejar el estado de forma granular. 
+*   Lo verás aplicado en el sistema de temas (`ThemeService`), donde la app reacciona instantáneamente al cambio entre modo luz y oscuridad.
+*   También lo usé en el modal de confirmación para manejar la lógica de "presionar para revelar" el código CUS, lo que hace que la interfaz se sienta mucho más fluida.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Comunicación entre Componentes
+Para mantener los componentes desacoplados, seguí el patrón de *Smart & Presentational Components*. 
+*   El formulario de transacción (`TransactionForm`) es un componente "tonto" que no sabe nada de servicios; simplemente valida los datos y usa un **EventEmitter** para avisarle al componente padre que el usuario quiere enviar dinero. 
+*   Esto hace que el código sea mucho más fácil de testear y reutilizar.
 
-```bash
-ng generate component component-name
-```
+### Capa de Datos: Patrón Repository
+Aunque los datos se guardan en el navegador, decidí implementar un **Repository Pattern**. 
+*   El `TransactionRepository` es el único que "habla" directamente con el **LocalStorage**. 
+*   ¿Por qué? Porque si mañana el proyecto crece y los datos pasan a una base de datos real o una API, solo tengo que cambiar el código en un solo lugar (el repositorio) sin romper el resto de la aplicación.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Seguridad y CUS
+Cada vez que haces un envío, la app genera un **Código Único de Seguridad (CUS)**. 
+*   Para que no sea texto plano, uso `crypto-js` para encriptarlo antes de guardarlo.
+*   En el historial verás el código encriptado por seguridad, y solo en el comprobante final permitimos que el usuario lo vea temporalmente mediante una interacción física.
 
-```bash
-ng generate --help
-```
+---
 
-## Building
+## 🐳 Despliegue con Docker (Recomendado)
 
-To build the project run:
+La forma más profesional y sencilla de probar la aplicación es utilizando **Docker Compose**. Esto automatiza la construcción y configuración de los puertos sin que tengas que escribir comandos largos.
 
-```bash
-ng build
-```
+### Cómo ponerlo en marcha
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+1.  **Levantar el entorno**:
+    Este comando se encarga de todo: compila la app, configura el servidor Nginx y lanza el contenedor en segundo plano.
+    ```bash
+    docker-compose up -d --build
+    ```
 
-## Running unit tests
+2.  **¡Listo!**:
+    Ya puedes entrar en [http://localhost:8080](http://localhost:8080) para ver la aplicación funcionando.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Otros comandos útiles
 
-```bash
-ng test
-```
+*   **Ver los logs**: `docker-compose logs -f`
+*   **Detener la app**: `docker-compose down`
 
-## Running end-to-end tests
+*Nota: He configurado Nginx específicamente para que las rutas de Angular funcionen bien (SPA), así que no tendrás errores al refrescar la página en el historial.*
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
+## � Instalación para Desarrollo
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Si prefieres el método tradicional:
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# transactions-simulator-frontend
+1.  Baja las dependencias: `npm install`
+2.  Arranca el proyecto: `npm run start`
+3.  Lo verás en: `http://localhost:4200`
