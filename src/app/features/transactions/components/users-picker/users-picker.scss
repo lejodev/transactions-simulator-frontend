@@ -47,6 +47,19 @@
     // Prevent text overflow - use ::ng-deep to penetrate Material's encapsulation
     ::ng-deep {
 
+        // Constrain the card header to prevent overflow
+        mat-card-header,
+        .mat-mdc-card-header {
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        // Constrain the header text content
+        .mat-mdc-card-header-text {
+            max-width: calc(100% - 56px); // Account for avatar space
+            min-width: 0; // Important for flex items to allow shrinking
+        }
+
         mat-card-title,
         .mat-mdc-card-title,
         mat-card-subtitle,

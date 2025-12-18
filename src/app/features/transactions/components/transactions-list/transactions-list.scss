@@ -13,69 +13,127 @@
 
 .transaction-card {
     transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #e5e7eb;
 
     &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        border-color: #d1d5db;
     }
 
-    mat-card-header {
+    // Horizontal layout: user info on left, transaction details on right
+    .card-content-horizontal {
+        display: flex;
+        justify-content: space-between;
         align-items: center;
+        gap: 2rem;
+        padding: 1rem;
     }
 
-    .user-avatar-container {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        overflow: hidden;
-        background-color: #f0f0f0;
+    // Left section: User info
+    .user-info-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-shrink: 0;
 
-        .user-avatar {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .user-avatar-container {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            border: 2px solid #e5e7eb;
+            flex-shrink: 0;
+
+            .user-avatar {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+
+            .user-name {
+                font-size: 1rem;
+                font-weight: 600;
+                color: #111827;
+            }
+
+            .transaction-date {
+                font-size: 0.875rem;
+                color: #6b7280;
+            }
         }
     }
 
-    // Custom layout for card content to show Amount + CUS clearly
-    .card-main-content {
+    // Right section: Transaction details
+    .transaction-info-section {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
-        padding-top: 0.5rem;
+        gap: 0.75rem;
+        align-items: flex-end;
+        flex-shrink: 0;
     }
 
     .transaction-row {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        flex-wrap: wrap; // Wrap on very small screens
-        gap: 0.5rem;
+        gap: 0.75rem;
+    }
+
+    .label {
+        font-size: 0.875rem;
+        color: #6b7280;
+        font-weight: 500;
+        white-space: nowrap;
     }
 }
 
 .transaction-amount {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 700;
 
     &.positive {
-        color: #2e7d32; // Green for incoming? Or just generic
+        color: #2e7d32; // Green
     }
 
     &.negative {
-        color: #e53935;
+        color: #e53935; // Red
     }
 }
 
 .transaction-cus {
-    margin-left: auto; // Push to right if in a flex row
-    font-size: 0.875rem;
-    padding: 4px 8px;
-    border-radius: 4px;
-    transition: background-color 0.2s;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s;
+
+    &:hover {
+        background-color: #f3f4f6;
+        border-color: #d1d5db;
+    }
+
+    .cus-value {
+        &.revealed {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        &.masked {
+            color: #9ca3af;
+        }
+    }
 
     .reveal-btn {
         width: 32px;
