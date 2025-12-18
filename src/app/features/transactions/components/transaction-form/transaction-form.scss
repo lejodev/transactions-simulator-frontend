@@ -1,0 +1,96 @@
+.transaction-card {
+    border-radius: 16px;
+    overflow: hidden;
+
+    mat-card-header {
+        background-color: #fafafa;
+        padding: 1.5rem;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .recipient-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    mat-card-content {
+        padding: 2rem 1.5rem;
+    }
+}
+
+.transaction-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .amount-field {
+        width: 100%;
+        font-size: 1.5rem; // Larger text for amount
+
+        .currency-prefix {
+            font-size: 1.5rem;
+            color: #666;
+            margin-right: 4px;
+        }
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 1.5rem !important; // Match touch targets
+        font-size: 1.1rem;
+        border-radius: 8px;
+    }
+}
+
+.empty-state-card {
+    border-radius: 16px;
+    border-style: dashed; // Dashed border for empty state
+    background-color: #fafafa;
+
+    .empty-state-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 1.5rem;
+        text-align: center;
+        color: #757575;
+
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+
+            mat-icon {
+                font-size: 40px;
+                width: 40px;
+                height: 40px;
+                color: #757575;
+            }
+        }
+
+        h3 {
+            margin: 0 0 0.5rem 0;
+            font-weight: 500;
+            color: #424242;
+        }
+
+        p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+    }
+}

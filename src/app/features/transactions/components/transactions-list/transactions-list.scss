@@ -1,0 +1,114 @@
+.transactions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem;
+}
+
+.transactions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.transaction-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    mat-card-header {
+        align-items: center;
+        // Make header a flex container to push content to the right if needed,
+        // but default Angular Material header behavior handles title/subtitle.
+        // We will position the amount absolutely or via a custom header layout.
+        // For mobile-first, let's keep it simple: Standard header, content below.
+    }
+
+    .user-avatar-container {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: #f0f0f0;
+
+        .user-avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    // Custom layout for card content to show Amount + CUS clearly
+    .card-main-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-top: 0.5rem;
+    }
+
+    .transaction-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap; // Wrap on very small screens
+        gap: 0.5rem;
+    }
+}
+
+.transaction-amount {
+    font-size: 1.25rem;
+    font-weight: 600;
+
+    &.positive {
+        color: #2e7d32; // Green for incoming? Or just generic
+    }
+
+    &.negative {
+        color: #e53935;
+    }
+}
+
+.transaction-cus {
+    margin-left: auto; // Push to right if in a flex row
+    font-size: 0.875rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .reveal-btn {
+        width: 32px;
+        height: 32px;
+        padding: 4px;
+        line-height: normal;
+
+        mat-icon {
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: #9ca3af;
+    text-align: center;
+
+    .empty-icon {
+        font-size: 48px;
+        width: 48px;
+        height: 48px;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    }
+}
