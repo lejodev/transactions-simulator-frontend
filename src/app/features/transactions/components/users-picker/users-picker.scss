@@ -1,8 +1,38 @@
+.search-container {
+    padding: 0 16px 16px 16px;
+
+    .search-field {
+        width: 100%;
+        font-size: 1rem;
+    }
+}
+
 .users-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 16px;
     padding: 16px;
+    max-height: calc((200px + 16px) * 2); // 2 rows visible (each card ~200px + gap)
+    overflow-y: auto;
+
+    // Smooth scrollbar styling
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+
+        &:hover {
+            background: #555;
+        }
+    }
 }
 
 .user-card {
@@ -12,6 +42,21 @@
     &:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    // Prevent text overflow - use ::ng-deep to penetrate Material's encapsulation
+    ::ng-deep {
+
+        mat-card-title,
+        .mat-mdc-card-title,
+        mat-card-subtitle,
+        .mat-mdc-card-subtitle {
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            white-space: nowrap !important;
+            display: block !important;
+            max-width: 100% !important;
+        }
     }
 }
 
