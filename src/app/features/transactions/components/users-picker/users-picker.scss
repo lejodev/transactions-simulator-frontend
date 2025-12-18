@@ -12,10 +12,10 @@
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 16px;
     padding: 16px;
-    max-height: calc((200px + 16px) * 2); // 2 rows visible (each card ~200px + gap)
+    max-height: calc((200px + 16px) * 2);
     overflow-y: auto;
 
-    // Smooth scrollbar styling
+
     &::-webkit-scrollbar {
         width: 8px;
     }
@@ -38,26 +38,30 @@
 .user-card {
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    min-width: 0;
 
     &:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    // Prevent text overflow - use ::ng-deep to penetrate Material's encapsulation
+
     ::ng-deep {
 
-        // Constrain the card header to prevent overflow
+
         mat-card-header,
         .mat-mdc-card-header {
             max-width: 100%;
             overflow: hidden;
+            min-width: 0;
         }
 
-        // Constrain the header text content
+
         .mat-mdc-card-header-text {
-            max-width: calc(100% - 56px); // Account for avatar space
-            min-width: 0; // Important for flex items to allow shrinking
+            max-width: calc(100% - 56px);
+            min-width: 0;
+            overflow: hidden;
         }
 
         mat-card-title,
@@ -69,6 +73,20 @@
             white-space: nowrap !important;
             display: block !important;
             max-width: 100% !important;
+            word-break: break-all !important;
+        }
+
+
+        mat-card-content,
+        .mat-mdc-card-content {
+            overflow: hidden;
+            max-width: 100%;
+
+            p {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
         }
     }
 }
