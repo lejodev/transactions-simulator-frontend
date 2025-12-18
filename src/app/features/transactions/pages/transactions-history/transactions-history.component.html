@@ -1,0 +1,29 @@
+<div class="history-container">
+
+    <div class="page-header">
+        <button mat-icon-button (click)="navigateToHome()" class="back-button" aria-label="Volver al inicio">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="header-content">
+            <h1>Historial de Transacciones</h1>
+            <p class="subtitle">Consulte todas las transacciones realizadas en el sistema.</p>
+        </div>
+    </div>
+
+    <section class="history-content">
+        <div class="transactions-wrapper">
+            <app-transactions-list [transactions]="transactions()"></app-transactions-list>
+        </div>
+
+        <div class="empty-state" *ngIf="transactions().length === 0">
+            <mat-icon class="empty-icon">receipt_long</mat-icon>
+            <h3>No hay transacciones registradas</h3>
+            <p>Las transacciones que realice aparecerán aquí.</p>
+            <button mat-raised-button color="primary" (click)="navigateToHome()">
+                <mat-icon>add</mat-icon>
+                Crear primera transacción
+            </button>
+        </div>
+    </section>
+
+</div>
