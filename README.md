@@ -2,6 +2,10 @@
 
 Solución frontend para un simulador de transacciones financieras. Enfocado en el uso de Angular 19, reactividad con **Signals** y arquitectura desacoplada basada en el **Patrón Repositorio**.
 
+## Video de presentación
+
+[![Presentación del Proyecto](https://img.youtube.com/vi/YWRHdxXAU_s/0.jpg)](https://www.youtube.com/watch?v=YWRHdxXAU_s)
+
 ## Stack
 
 - **Framework**: Angular 19 
