@@ -42,7 +42,25 @@ npm install
 ```
 
 **Configurar entorno**:
-Revisar `src/environments/environment.development.ts`. Asegúrate de definir la `cryptoKey` y la `apiUrl`.
+
+En versiones recientes de Angular, los archivos de entorno no se generan por defecto. Para crearlos, ejecuta:
+```bash
+ng generate environments
+```
+
+Esto generará la carpeta `src/environments/`. Debes configurar los archivos `environment.ts` y `environment.development.ts` de la siguiente manera:
+
+```typescript
+export const environment = {
+  production: false, // Cambia a true en producción
+  // La API es pública, pero se define aquí por buenas prácticas de desacoplamiento
+  apiUrl: 'https://randomuser.me/api/?results=50&inc=login,name,email,picture,phone',
+  cryptoKey: Valor de llave secreta definido en variables de entorno
+};
+```
+
+> [!NOTE]  
+> Aunque la `apiUrl` apunta a un servicio público (`randomuser.me`), se mantiene en el archivo de entorno para facilitar el cambio entre servicios de Mocking y Producción sin tocar el código fuente, siguiendo el principio de S.O.L.I.D.
 
 **Ejecutar en local**:
 ```bash
