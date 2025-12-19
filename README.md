@@ -67,7 +67,7 @@ export const environment = {
 npm run start
 ```
 
-Acceso normalmente en: http://localhost:4200
+Acceso normalmente en: http://localhost:4200 o en puerto disponible en el momento de ejecutar el comando.
 
 ---
 
