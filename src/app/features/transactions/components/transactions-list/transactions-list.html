@@ -1,1 +1,45 @@
-<p>transactions-list works!</p>
+<div class="transactions-container">
+    @if (transactions.length > 0) {
+    <div class="transactions-list">
+        @for (transaction of transactions; track transaction.id) {
+        <mat-card class="transaction-card" appearance="outlined">
+            <div class="card-content-vertical">
+                <!-- Top: User Info and Amount on same line -->
+                <div class="card-header-row">
+                    <div class="user-info-section">
+                        <div class="user-avatar-container">
+                            <img [src]="transaction.user.picture" alt="User Avatar" class="user-avatar"
+                                onerror="this.src='assets/default-avatar.png';">
+                        </div>
+                        <div class="user-details">
+                            <div class="user-name">{{transaction.user.name}}</div>
+                            <div class="transaction-date">{{transaction.date | date:'short'}}</div>
+                        </div>
+                    </div>
+
+                    <div class="amount-section">
+                        <span class="label">Monto:</span>
+                        <div class="transaction-amount positive">
+                            {{transaction.amount | currency:'USD':'symbol':'1.0-0'}}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom: CUS in full width -->
+                <div class="cus-section">
+                    <span class="label">CUS:</span>
+                    <div class="transaction-cus">
+                        <span class="cus-value">{{transaction.cus}}</span>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+        }
+    </div>
+    } @else {
+    <div class="empty-state">
+        <mat-icon class="empty-icon">history</mat-icon>
+        <p>Aún no hay transacciones.</p>
+    </div>
+    }
+</div>

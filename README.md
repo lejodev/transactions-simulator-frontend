@@ -1,60 +1,70 @@
-# Frontend
+# Simulador de transacciones (Angular 19)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.5.
+Solución frontend para un simulador de transacciones financieras. Enfocado en el uso de Angular 19, reactividad con **Signals** y arquitectura desacoplada basada en el **Patrón Repositorio**.
 
-## Development server
+## Stack
 
-To start a local development server, run:
+- **Framework**: Angular 19 
+- **UI**: Angular Material.
+- **Estado**: Angular Signals (Presente en nuevas versiones Angular).
+- **Estilos**: SCSS con feature (Light/Dark).
+- **Seguridad**: Crypto-JS pare generación de CUS.
+- **Contenerización**: Docker.
 
+## Arquitectura
+
+### 1. Reactividad con Signals
+No usé Observables para el estado local, opté por Signals
+
+### 2. Patrón Repositoro
+La lógica de persistencia se ha encapsulado en `TransactionRepository`.
+
+**Nota**: El patrón repositorio garantiza en este caso que el servicio que lo utiliza es agnóstico a la fuente de datos, en este caso son datos persistidos en localstorage, pero es adaptable para poderse conectar con API’s externas o datos hardcodeados
+
+### 3. Componentes Smart & Presentational
+Uso de componentes smart para garantiar poco acoplamiento, usé `@Input()` y `@output()` para manejo de eventos y paso de información 
+
+### 4. Generación de CUS
+Los datos de el usuario se encriptan usando la libraría Crypto-js, se usan con una llave simétrica que se encuentra en las variables de entorno y se llama `cryptoKey`
+
+---
+
+## Requisitos Previos
+
+- **Node.js**: v20.x o superior.
+- **Docker & Docker Compose** (opcional para despliegue).
+
+## Instalación y Desarrollo
+
+**Instalar dependencias**:
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+**Configurar entorno**:
+Revisar `src/environments/environment.development.ts`. Asegúrate de definir la `cryptoKey` y la `apiUrl`.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+**Ejecutar en local**:
 ```bash
-ng generate component component-name
+npm run start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Acceso normalmente en: http://localhost:4200
 
+---
+
+## Despliegue con Docker
+
+El proyecto incluye un Dockerfile multi-etapa para generar una imagen optimizada servida por Nginx.
+
+**Levantar entorno completo**:
 ```bash
-ng generate --help
+docker-compose up -d --build
 ```
 
-## Building
+La aplicación estará disponible en http://localhost:8080.
 
-To build the project run:
-
+**Nota para Windows**: Si encuentras errores de EOF con BuildKit, ejecuta:
 ```bash
-ng build
+$env:DOCKER_BUILDKIT=0; docker-compose up -d --build
 ```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# transactions-simulator-frontend

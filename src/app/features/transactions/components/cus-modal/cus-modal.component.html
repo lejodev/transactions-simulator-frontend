@@ -1,0 +1,50 @@
+<div class="cus-modal-container">
+    <button mat-icon-button class="modal-close-btn" (click)="onClose()">
+        <mat-icon>close</mat-icon>
+    </button>
+    <div class="modal-header">
+        <mat-icon class="success-icon">check_circle</mat-icon>
+        <h2>Transacción Exitosa</h2>
+        <p class="subtitle">Su comprobante ha sido generado correctamente.</p>
+    </div>
+
+    <mat-dialog-content class="modal-content">
+        <div class="info-card">
+            <div class="info-row">
+                <span class="label">Beneficiario:</span>
+                <span class="value">{{ data.transaction.user.name }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Monto:</span>
+                <span class="value amount">{{ data.transaction.amount | currency:'USD':'symbol':'1.0-0' }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Fecha:</span>
+                <span class="value">{{ data.transaction.date | date:'medium' }}</span>
+            </div>
+        </div>
+
+        <div class="cus-display-container">
+            <span class="cus-label">CUS (Código Único de Seguridad)</span>
+            <div class="cus-value-wrapper">
+                <span class="cus-value" [class.revealed]="isRevealed()">
+                    {{ isRevealed() ? decryptedCus() : data.transaction.cus }}
+                </span>
+            </div>
+            <p class="help-text">Mantenga presionado el botón para ver el código original</p>
+
+            <button mat-flat-button color="accent" class="reveal-button" (mousedown)="onPressStart()"
+                (mouseup)="onPressEnd()" (mouseleave)="onPressEnd()" (touchstart)="onPressStart()"
+                (touchend)="onPressEnd()">
+                <mat-icon>{{ isRevealed() ? 'visibility' : 'visibility_off' }}</mat-icon>
+                Ver CUS original
+            </button>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="center">
+        <button mat-raised-button color="primary" (click)="onClose()">
+            Entendido
+        </button>
+    </mat-dialog-actions>
+</div>

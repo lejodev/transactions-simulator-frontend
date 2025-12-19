@@ -1,17 +1,96 @@
+.search-container {
+    padding: 0 16px 16px 16px;
+
+    .search-field {
+        width: 100%;
+        font-size: 1rem;
+    }
+}
+
 .users-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 16px;
     padding: 16px;
+    max-height: calc((200px + 16px) * 2);
+    overflow-y: auto;
+
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--surface-tint);
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--text-secondary);
+        border-radius: 4px;
+        opacity: 0.5;
+
+        &:hover {
+            background: var(--text-primary);
+        }
+    }
 }
 
 .user-card {
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+    background-color: var(--card-bg);
+    overflow: hidden;
+    min-width: 0;
 
     &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background-color: var(--card-hover);
+    }
+
+
+    ::ng-deep {
+
+
+        mat-card-header,
+        .mat-mdc-card-header {
+            max-width: 100%;
+            overflow: hidden;
+            min-width: 0;
+        }
+
+
+        .mat-mdc-card-header-text {
+            max-width: calc(100% - 56px);
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        mat-card-title,
+        .mat-mdc-card-title,
+        mat-card-subtitle,
+        .mat-mdc-card-subtitle {
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            white-space: nowrap !important;
+            display: block !important;
+            max-width: 100% !important;
+            word-break: break-all !important;
+        }
+
+
+        mat-card-content,
+        .mat-mdc-card-content {
+            overflow: hidden;
+            max-width: 100%;
+
+            p {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
     }
 }
 
@@ -24,5 +103,5 @@
     font-size: 18px;
     vertical-align: middle;
     margin-right: 4px;
-    color: gray;
+    color: var(--text-secondary);
 }

@@ -1,0 +1,28 @@
+# Git
+.git
+.gitignore
+
+# Dependencies
+node_modules
+.angular
+
+# Build outputs
+dist
+dist-temp
+
+# IDEs
+.vscode
+.idea
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Documentation
+README.md
+agent.md
+C:\Users\alriv\.gemini
