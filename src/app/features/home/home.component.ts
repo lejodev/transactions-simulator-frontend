@@ -57,7 +57,8 @@ export class HomeComponent {
             // Show CUS Modal
             const dialogRef = this.dialog.open(CusModalComponent, {
                 data: { transaction: createdTransaction },
-                width: '500px'
+                width: '450px',
+                maxWidth: '90vw'
             });
 
             dialogRef.afterClosed().subscribe(() => {

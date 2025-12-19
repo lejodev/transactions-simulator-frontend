@@ -1,5 +1,13 @@
 @use '@angular/material' as mat;
 
+* {
+  box-sizing: border-box;
+}
+
+app-root {
+  display: block;
+}
+
 :root {
   --bg-color: var(--mat-sys-surface);
   --text-primary: var(--mat-sys-on-surface);
