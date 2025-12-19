@@ -47,7 +47,7 @@ En versiones recientes de Angular, los archivos de entorno no se generan por def
 ```bash
 ng generate environments
 ```
-En caso de no funcionar, ejecutar el siguiente comando:
+En caso de no funcionar, ejecutar el siguiente comando: 
 ```bash
 npx ng generate environments
 ```
