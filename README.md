@@ -1,65 +1,70 @@
-# Simulador de Transacciones - Cotrafa
+# Simulador de transacciones (Angular 19)
 
-Este proyecto es una aplicación web moderna diseñada para simular el envío de dinero entre usuarios. Está construida sobre **Angular 19** y utiliza **Angular Material** para ofrecer una interfaz limpia, profesional y con soporte completo para modo oscuro.
+Solución frontend para un simulador de transacciones financieras. Enfocado en el uso de Angular 19, reactividad con **Signals** y arquitectura desacoplada basada en el **Patrón Repositorio**.
 
-La aplicación permite gestionar todo el flujo de una transacción: desde elegir al destinatario y definir el monto, hasta generar un comprobante con un código de seguridad (CUS) encriptado y consultar el historial.
+## Stack
 
----
+- **Framework**: Angular 19 
+- **UI**: Angular Material.
+- **Estado**: Angular Signals (Presente en nuevas versiones Angular).
+- **Estilos**: SCSS con feature (Light/Dark).
+- **Seguridad**: Crypto-JS pare generación de CUS.
+- **Contenerización**: Docker.
 
-## 🛠️ Detalles Técnicos y Arquitectura
+## Arquitectura
 
-En este desarrollo me enfoqué en usar las funcionalidades más recientes de Angular y seguir patrones que faciliten el mantenimiento a largo plazo. Aquí te cuento los puntos clave:
+### 1. Reactividad con Signals
+No usé Observables para el estado local, opté por Signals
 
-### Gestión de Estado con Signals
-En lugar de depender del sistema de detección de cambios tradicional, utilicé **Angular Signals** para manejar el estado de forma granular. 
-*   Lo verás aplicado en el sistema de temas (`ThemeService`), donde la app reacciona instantáneamente al cambio entre modo luz y oscuridad.
-*   También lo usé en el modal de confirmación para manejar la lógica de "presionar para revelar" el código CUS, lo que hace que la interfaz se sienta mucho más fluida.
+### 2. Patrón Repositoro
+La lógica de persistencia se ha encapsulado en `TransactionRepository`.
 
-### Comunicación entre Componentes
-Para mantener los componentes desacoplados, seguí el patrón de *Smart & Presentational Components*. 
-*   El formulario de transacción (`TransactionForm`) es un componente "tonto" que no sabe nada de servicios; simplemente valida los datos y usa un **EventEmitter** para avisarle al componente padre que el usuario quiere enviar dinero. 
-*   Esto hace que el código sea mucho más fácil de testear y reutilizar.
+**Nota**: El patrón repositorio garantiza en este caso que el servicio que lo utiliza es agnóstico a la fuente de datos, en este caso son datos persistidos en localstorage, pero es adaptable para poderse conectar con API’s externas o datos hardcodeados
 
-### Capa de Datos: Patrón Repository
-Aunque los datos se guardan en el navegador, decidí implementar un **Repository Pattern**. 
-*   El `TransactionRepository` es el único que "habla" directamente con el **LocalStorage**. 
-*   ¿Por qué? Porque si mañana el proyecto crece y los datos pasan a una base de datos real o una API, solo tengo que cambiar el código en un solo lugar (el repositorio) sin romper el resto de la aplicación.
+### 3. Componentes Smart & Presentational
+Uso de componentes smart para garantiar poco acoplamiento, usé `@Input()` y `@output()` para manejo de eventos y paso de información 
 
-### Seguridad y CUS
-Cada vez que haces un envío, la app genera un **Código Único de Seguridad (CUS)**. 
-*   Para que no sea texto plano, uso `crypto-js` para encriptarlo antes de guardarlo.
-*   En el historial verás el código encriptado por seguridad, y solo en el comprobante final permitimos que el usuario lo vea temporalmente mediante una interacción física.
+### 4. Generación de CUS
+Los datos de el usuario se encriptan usando la libraría Crypto-js, se usan con una llave simétrica que se encuentra en las variables de entorno y se llama `cryptoKey`
 
 ---
 
-## 🐳 Despliegue con Docker (Recomendado)
+## Requisitos Previos
 
-La forma más profesional y sencilla de probar la aplicación es utilizando **Docker Compose**. Esto automatiza la construcción y configuración de los puertos sin que tengas que escribir comandos largos.
+- **Node.js**: v20.x o superior.
+- **Docker & Docker Compose** (opcional para despliegue).
 
-### Cómo ponerlo en marcha
+## Instalación y Desarrollo
 
-1.  **Levantar el entorno**:
-    Este comando se encarga de todo: compila la app, configura el servidor Nginx y lanza el contenedor en segundo plano.
-    ```bash
-    docker-compose up -d --build
-    ```
+**Instalar dependencias**:
+```bash
+npm install
+```
 
-2.  **¡Listo!**:
-    Ya puedes entrar en [http://localhost:8080](http://localhost:8080) para ver la aplicación funcionando.
+**Configurar entorno**:
+Revisar `src/environments/environment.development.ts`. Asegúrate de definir la `cryptoKey` y la `apiUrl`.
 
-### Otros comandos útiles
+**Ejecutar en local**:
+```bash
+npm run start
+```
 
-*   **Ver los logs**: `docker-compose logs -f`
-*   **Detener la app**: `docker-compose down`
-
-*Nota: He configurado Nginx específicamente para que las rutas de Angular funcionen bien (SPA), así que no tendrás errores al refrescar la página en el historial.*
+Acceso normalmente en: http://localhost:4200
 
 ---
 
-## � Instalación para Desarrollo
+## Despliegue con Docker
 
-Si prefieres el método tradicional:
+El proyecto incluye un Dockerfile multi-etapa para generar una imagen optimizada servida por Nginx.
 
-1.  Baja las dependencias: `npm install`
-2.  Arranca el proyecto: `npm run start`
-3.  Lo verás en: `http://localhost:4200`
+**Levantar entorno completo**:
+```bash
+docker-compose up -d --build
+```
+
+La aplicación estará disponible en http://localhost:8080.
+
+**Nota para Windows**: Si encuentras errores de EOF con BuildKit, ejecuta:
+```bash
+$env:DOCKER_BUILDKIT=0; docker-compose up -d --build
+```
