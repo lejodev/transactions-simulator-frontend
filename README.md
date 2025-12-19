@@ -47,6 +47,11 @@ En versiones recientes de Angular, los archivos de entorno no se generan por def
 ```bash
 ng generate environments
 ```
+En caso de no funcionar, ejecutar el siguiente comando: 
+```bash
+npx ng generate environments
+```
+En caso que ninguno funciones, hacerlo manualmente creando la carpeta `src/environments/` y los archivos `environment.ts` y `environment.development.ts`.
 
 Esto generará la carpeta `src/environments/`. Debes configurar los archivos `environment.ts` y `environment.development.ts` de la siguiente manera:
 
